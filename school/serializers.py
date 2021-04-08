@@ -21,9 +21,49 @@ class StudentSerializer(object):
     
     @property
     def student_detail(self):
+        # breakpoint()
+        courses = []
+        # course.objects.filter()
+        for course in self.body.courses.all():
+            courses.append({'course_name': course.course_name})
         return {
             'id': self.body.id,
             'first_name': self.body.first_name,
             'last_name': self.body.last_name,
-            'age': self.body.age
+            'age': self.body.age,
+            'courses': courses
+        }
+
+
+class CourseSerializer(object):
+    def __init__(self, body):
+        self.body = body
+    
+    @property
+    def all_courses(self):
+        output = {'courses': []}
+        for each in self.body:
+            course_details = {
+                'id': each.id,
+                'course_name': each.course_name
+            }
+            output['courses'].append(course_details)
+
+        return output
+
+
+    @property
+    def course_detail(self):
+        students = []
+        for student in self.body.students.all():
+            students.append({
+                'id': student.id,
+                'first_name': student.first_name,
+                'last_name': student.last_name,
+                'age': student.age
+                })
+        return {
+            'id': self.body.id,
+            'course_name': self.body.course_name,
+            'students': students
         }

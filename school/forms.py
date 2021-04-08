@@ -1,7 +1,13 @@
 from django import forms
-from .models import Students
+from .models import Student, Course
 
 class StudentForm(forms.ModelForm):
     class Meta:
-        model = Students
+        model = Student
         fields = ('first_name', 'last_name', 'age')
+
+
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ('course_name',)
