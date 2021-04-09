@@ -7,7 +7,7 @@ class Student(models.Model):
     age = models.CharField(max_length=10)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"ID:{self.id}-{self.first_name} {self.last_name}"
 
 
 class Course(models.Model):
@@ -16,23 +16,6 @@ class Course(models.Model):
     students = models.ManyToManyField(Student, related_name='courses')
 
     def __str__(self):
-        return self.course_name
+        return f"ID:{self.id}-{self.course_name}"
 
 
-#mightve not worked
-
-# class Courses(models.Model):
-#     course_name = models.CharField(max_length=255)
-#     students = models.ManyToManyField(
-#         Students, 
-#         through="Enrollments", 
-#         through_fields=('course', 'student' )
-#     )
-
-#     def __str__(self):
-#         return self.course_name
-
-# # join table
-# class Enrollments(models.Model):
-#     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
-#     student = models.ForeignKey(Students, on_delete=models.CASCADE)
