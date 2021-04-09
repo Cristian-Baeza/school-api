@@ -19,20 +19,3 @@ class Course(models.Model):
         return self.course_name
 
 
-#mightve not worked
-
-# class Courses(models.Model):
-#     course_name = models.CharField(max_length=255)
-#     students = models.ManyToManyField(
-#         Students, 
-#         through="Enrollments", 
-#         through_fields=('course', 'student' )
-#     )
-
-#     def __str__(self):
-#         return self.course_name
-
-# # join table
-# class Enrollments(models.Model):
-#     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
-#     student = models.ForeignKey(Students, on_delete=models.CASCADE)
