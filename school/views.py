@@ -97,8 +97,26 @@ def delete_course(request,course_id):
 
 #NESTED URL VIEWS
 
+@csrf_exempt
 def enroll_student(request, course_id, student_id):
-    pass
+    if request.method == "POST":
+        course = Course.objects.get(id=course_id)
+        student = Student.objects.get(id=student_id)
+        course.students.add(student)
 
+        course.save()
+
+        serialized_course = CourseSerializer(course).course_detail
+        return JsonResponse(data=serialized_course, status=200)
+
+@csrf_exempt
 def drop_student(request, course_id, student_id):
-    pass
+    if request.method == "POST":
+        course = Course.objects.get(id=course_id)
+        student = Student.objects.get(id=student_id)
+        course.students.remove(student)
+
+        course.save()
+
+        serialized_course = CourseSerializer(course).course_detail
+        return JsonResponse(data=serialized_course, status=200)
