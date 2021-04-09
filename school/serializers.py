@@ -1,17 +1,19 @@
 #DJANGO REST
 from rest_framework import serializers
-from .models import Student
+from .models import Student, Course
 
 class StudentSerializer(serializers.ModelSerializer):
+    courses = serializers.StringRelatedField(many=True)
     class Meta:
         model = Student
-        fields = ['id', 'first_name', 'last_name', 'age']
+        fields = ['id', 'first_name', 'last_name', 'age', 'courses']
 
-# dont forget to import 
-# class CourseSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Course
-#         fields = ['id', 'course_name'] # add students?
+
+class CourseSerializer(serializers.ModelSerializer):
+    students = serializers.StringRelatedField(many=True)
+    class Meta:
+        model = Course
+        fields = ['id', 'course_name', 'students'] # add students?
 
 
 

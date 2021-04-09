@@ -7,7 +7,7 @@ class Student(models.Model):
     age = models.CharField(max_length=10)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"ID:{self.id}-{self.first_name} {self.last_name}"
 
 
 class Course(models.Model):
@@ -16,6 +16,6 @@ class Course(models.Model):
     students = models.ManyToManyField(Student, related_name='courses')
 
     def __str__(self):
-        return self.course_name
+        return f"ID:{self.id}-{self.course_name}"
 
 
